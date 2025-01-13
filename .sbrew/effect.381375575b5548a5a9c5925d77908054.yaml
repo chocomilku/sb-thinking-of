@@ -1,0 +1,16 @@
+﻿FormatVersion: 7
+Name: "TextController 1"
+Script: "TextController"
+Multithreaded: No
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random Seed"
+    BeginsGroup: "Common"
+Layers:
+  4680148866ef4a72b2e52148e40ecfa1:
+    Name: "Text Layer"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
