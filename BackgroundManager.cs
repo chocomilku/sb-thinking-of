@@ -14,8 +14,10 @@ namespace StorybrewScripts
 {
     public class BackgroundManager : StoryboardObjectGenerator
     {
+        public static double BeatDuration;
         public override void Generate()
         {
+            BeatDuration = Beatmap.TimingPoints.First().BeatDuration;
             GetLayer("Remove BG").CreateSprite(Beatmap.BackgroundPath).Fade(0, 0);
 
             StoryboardLayer layer = GetLayer("BG Layer");
@@ -33,8 +35,61 @@ namespace StorybrewScripts
             circle.Fade(1417, 0);
             circle.Scale(OsbEasing.InExpo, 1061, 1417, 0, 854.0f / GetMapsetBitmap(circle.TexturePath).Width * 2);
 
+            // GhostController
+            GhostController ghost = new GhostController(this, layer, "sb/ghost.png", new Vector2(320, 200));
+            ghost.InitSprite(1061);
+            ghost.FadeIn(1417, 2038);
+            ghost.BopMovement(1417, 126387, (int)BeatDuration * 8, 15);
+            ghost.FadeOut(126387);
+        }
 
+        class GhostController
+        {
+            private readonly StoryboardObjectGenerator ctx;
+            private readonly StoryboardLayer layer;
+            private readonly OsbSprite sprite;
+            private readonly float scale = 1f;
 
+            public GhostController(StoryboardObjectGenerator ctx, StoryboardLayer layer, string path, Vector2 initPos)
+            {
+                this.ctx = ctx;
+                this.layer = layer;
+
+                sprite = layer.CreateSprite(path, OsbOrigin.Centre, initPos);
+            }
+
+            public void InitSprite(int time)
+            {
+                sprite.Fade(time, 0);
+                sprite.Scale(time, 854.0f / ctx.GetMapsetBitmap(sprite.TexturePath).Width * 0.125f * scale);
+            }
+
+            public void FadeIn(int startTime, int endTime)
+            {
+                sprite.Fade(startTime, endTime, 0, 1);
+            }
+            public void FadeOut(int time)
+            {
+                sprite.Fade(time, 0);
+            }
+
+            public void BopMovement(int startTime, int endTime, int interval, int amount)
+            {
+                int loopCount = (endTime - startTime) / interval;
+                int dur = interval / 4;
+                float initialY = sprite.PositionAt(startTime).Y;
+
+                sprite.StartLoopGroup(startTime, loopCount);
+                sprite.MoveY(OsbEasing.OutSine, 0, 0 + dur * 1, initialY, initialY + amount);
+                sprite.MoveY(OsbEasing.InOutSine, 0 + dur * 1, 0 + dur * 3, initialY + amount, initialY - amount);
+                sprite.MoveY(OsbEasing.InSine, 0 + dur * 3, 0 + dur * 4, initialY - amount, initialY);
+                sprite.EndGroup();
+            }
+
+            public OsbSprite GetSprite()
+            {
+                return sprite;
+            }
         }
     }
 }
