@@ -22,24 +22,48 @@ namespace StorybrewScripts
                 FontPath = "THEBOLDFONT-FREEVERSION.otf",
                 FontSize = 48,
                 Color = Color4.White,
-            },
-            new FontShadow()
-            {
-                Color = new Color4(0, 0, 0, 60),
-                Thickness = 2
             }
+            // new FontShadow()
+            // {
+            //     Color = new Color4(0, 0, 0, 60),
+            //     Thickness = 2
+            // }
+            );
+
+            FontGenerator smallFont = LoadFont("sb/font/s", new FontDescription()
+            {
+                FontPath = "THEBOLDFONT-FREEVERSION.otf",
+                FontSize = 24,
+                Color = Color4.White,
+            }
+            // new FontShadow()
+            // {
+            //     Color = new Color4(0, 0, 0, 60),
+            //     Thickness = 2
+            // }
             );
 
             // layers
             StoryboardLayer layer = GetLayer("Text Layer");
+            StoryboardLayer layerD = GetLayer("Text Layer -- Diff Specific");
 
             //
-            List<OsbSprite> introArtist = LyricLineSpriteFactoryHorizontal(layer, mediumFont, "THEMUSICALGHOST", new Vector2(320, 240));
+            List<OsbSprite> introArtist = LyricLineSpriteFactoryHorizontal(layerD, mediumFont, $"MILKU's THINKING OF [{Beatmap.Name}]", new Vector2(320, 240));
 
             LyricInitializer(introArtist, 529, new Color4(218, 46, 127, 255));
             introArtist[0].MoveY(OsbEasing.OutBack, 706, 1061, 272, 240);
             SimpleFadeIn(introArtist, 706, 884);
             SimpleFadeOut(introArtist, 1061, 1328);
+
+            List<OsbSprite> title = LyricLineSpriteFactoryHorizontal(layer, mediumFont, "THINKING OF", new Vector2(320, 305));
+            LyricInitializer(title, 1772, new Color4(218, 46, 127, 255));
+            SimpleFadeIn(title, 1772, 2127);
+            FadeNoTransition(title, 126387, 0);
+
+            List<OsbSprite> artist = LyricLineSpriteFactoryHorizontal(layer, smallFont, "THEMUSICALGHOST", new Vector2(320, 330));
+            LyricInitializer(artist, 1772, new Color4(50, 43, 59, 255));
+            SimpleFadeIn(artist, 1772, 2127);
+            FadeNoTransition(artist, 126387, 0);
 
 
 
