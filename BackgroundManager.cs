@@ -35,12 +35,24 @@ namespace StorybrewScripts
             circle.Fade(1417, 0);
             circle.Scale(OsbEasing.InExpo, 1061, 1417, 0, 854.0f / GetMapsetBitmap(circle.TexturePath).Width * 2);
 
+            // outline
+            OsbSprite outline = layer.CreateSprite("sb/outline.png", OsbOrigin.Centre, new Vector2(320, 240));
+            outline.Fade(12422, 0);
+            OutlineJumpscare(outline, 12422);
+
             // GhostController
             GhostController ghost = new GhostController(this, layer, "sb/ghost.png", new Vector2(320, 200));
             ghost.InitSprite(1061);
             ghost.FadeIn(1417, 2038);
             ghost.BopMovement(1417, 126387, (int)BeatDuration * 8, 15);
             ghost.FadeOut(126387);
+        }
+
+        public void OutlineJumpscare(OsbSprite sprite, int time)
+        {
+            sprite.Fade(time, time + BeatDuration / 2, 0, 1);
+            sprite.Fade(time + BeatDuration, 0);
+            sprite.Scale(OsbEasing.In, time, time + BeatDuration, 0, 854.0f / GetMapsetBitmap(sprite.TexturePath).Width * 2);
         }
 
         class GhostController
