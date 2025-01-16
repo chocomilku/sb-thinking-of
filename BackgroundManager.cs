@@ -64,6 +64,16 @@ namespace StorybrewScripts
             ghost.BopMovement(1417, 126387, (int)BeatDuration * 8, 15);
             ghost.FadeOut(126387);
 
+            List<(int, int)> ghostBeams = [(24138, 25203), (25559, 25914), (26091, 26446), (26624, 27689), (28399, 28754), (28931, 29286), (29819, 30884), (31239, 31594), (31772, 32127), (32304, 33369), (34079, 34434), (34612, 34967), (35144, 35499), (46860, 47570), (47748, 47925), (48103, 48458), (48990, 49168), (49345, 49523), (49701, 50411), (50588, 50766), (50943, 51298), (51831, 52008), (52186, 52363), (52541, 53073), (53783, 54138), (54671, 54848), (55026, 55203), (55381, 55736), (55914, 56269), (56446, 56801), (56979, 57334), (57511, 57866), (57866, 58221), (59109, 59286), (59464, 59996), (60706, 60884), (61061, 61416), (62304, 62659), (63192, 63369), (63547, 63724), (63902, 64257), (64612, 64789), (64908, 65085), (65144, 65677), (66032, 66387), (66742, 67097), (67274, 67630), (67807, 68162), (68340, 68695), (68872, 69050), (69227, 69405)];
+
+            bool goLeft = true;
+            foreach ((int, int) beam in ghostBeams)
+            {
+                ghost.GhostBeam(beam.Item1, beam.Item2, goLeft);
+                goLeft = !goLeft;
+            }
+
+
             // particles
             StoryboardLayer particleLayer = GetLayer("Particle Layer");
             ParticleGoingUp(particleLayer, "sb/icons/star.png", 12777, 24138, 16, 60, 0, (int)BeatDuration * 2, new Color4(218, 46, 127, 255));
@@ -197,6 +207,9 @@ namespace StorybrewScripts
                 sprite.Scale(time, 854.0f / ctx.GetMapsetBitmap(sprite.TexturePath).Width * 0.125f * scale);
             }
 
+
+
+
             public void FadeIn(int startTime, int endTime)
             {
                 sprite.Fade(startTime, endTime, 0, 1);
@@ -217,6 +230,52 @@ namespace StorybrewScripts
                 sprite.MoveY(OsbEasing.InOutSine, 0 + dur * 1, 0 + dur * 3, initialY + amount, initialY - amount);
                 sprite.MoveY(OsbEasing.InSine, 0 + dur * 3, 0 + dur * 4, initialY - amount, initialY);
                 sprite.EndGroup();
+            }
+
+            public void BopMovement(OsbSprite s, int startTime, int endTime, int interval, int amount)
+            {
+                int loopCount = (endTime - startTime) / interval;
+                int dur = interval / 4;
+                float initialY = s.PositionAt(startTime).Y;
+                float X = s.PositionAt(startTime).X;
+
+                s.StartLoopGroup(startTime, loopCount);
+                s.Move(OsbEasing.OutSine, 0, 0 + dur * 1, new Vector2(X, initialY), new Vector2(X, initialY + amount));
+                s.Move(OsbEasing.InOutSine, 0 + dur * 1, 0 + dur * 3, new Vector2(X, initialY + amount), new Vector2(X, initialY - amount));
+                s.Move(OsbEasing.InSine, 0 + dur * 3, 0 + dur * 4, new Vector2(X, initialY - amount), new Vector2(X, initialY));
+                s.EndGroup();
+            }
+
+            public void InitSprite(OsbSprite s, int time, float scale)
+            {
+                s.Scale(time, 854.0f / ctx.GetMapsetBitmap(s.TexturePath).Width * 0.125f * scale);
+            }
+
+            public void GhostBeam(int startTime, int endTime, bool toLeft = true, bool additive = false)
+            {
+                float beam1Opacity = 0.2f;
+                float beam2Opacity = 0.1f;
+                Vector2 beam1Pos = toLeft ? new Vector2(150, 220) : new Vector2(490, 220);
+                Vector2 beam2Pos = toLeft ? new Vector2(-75, 220) : new Vector2(715, 220);
+
+
+                OsbSprite beam1 = layer.CreateSprite(sprite.TexturePath, OsbOrigin.Centre);
+                InitSprite(beam1, startTime - (int)BeatDuration / 4, 1.5f);
+                if (additive) beam1.Additive(startTime - BeatDuration / 4);
+                beam1.Move(OsbEasing.InSine, startTime - BeatDuration / 4, startTime, sprite.PositionAt(startTime - BeatDuration / 4), beam1Pos);
+                beam1.Fade(OsbEasing.InExpo, startTime - BeatDuration / 4, startTime, 0, beam1Opacity);
+                BopMovement(beam1, startTime, endTime, (int)BeatDuration / 4, 5);
+                beam1.Fade(endTime - BeatDuration / 4, endTime, beam1Opacity, 0);
+
+                OsbSprite beam2 = layer.CreateSprite(sprite.TexturePath, OsbOrigin.Centre);
+                InitSprite(beam2, startTime - (int)BeatDuration / 4, 3f);
+                if (additive) beam2.Additive(startTime - BeatDuration / 4);
+                beam2.Move(OsbEasing.InSine, startTime - BeatDuration / 4, startTime, sprite.PositionAt(startTime - BeatDuration / 4), beam2Pos);
+                beam2.Fade(OsbEasing.InExpo, startTime - BeatDuration / 4, startTime, 0, beam2Opacity);
+                BopMovement(beam2, startTime, endTime, (int)BeatDuration / 4, 5);
+                beam2.Fade(endTime - BeatDuration / 4, endTime, beam2Opacity, 0);
+
+
             }
 
             public OsbSprite GetSprite()
