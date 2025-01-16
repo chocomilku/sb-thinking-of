@@ -79,7 +79,7 @@ namespace StorybrewScripts
                 // 1417
                 // 126387
                 bar.Fade(1949, 2304, 0, 1);
-                bar.Fade(EndTime, 0);
+                bar.Fade(126387, 128162, 1, 0);
                 // bar.ColorHsb(StartTime, (i * 360.0 / BarCount) + Random(-10.0, 10.0), 0.6 + Random(0.4), 1);
                 // bar.Additive(StartTime, EndTime);
 
