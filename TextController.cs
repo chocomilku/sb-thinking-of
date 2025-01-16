@@ -72,6 +72,10 @@ namespace StorybrewScripts
             List<OsbSprite> title = LyricLineSpriteFactoryHorizontal(layerG, mediumFont, "THINKING OF", new Vector2(320, 305));
             LyricInitializer(title, 1772, new Color4(218, 46, 127, 255));
             SimpleFadeIn(title, 1772, 2127);
+            title[0].MoveY(OsbEasing.InOutExpo, 35144, 35854, 305, 110);
+            title[0].MoveY(OsbEasing.InOutExpo, 45085, 45795, 110, 305);
+            title[0].MoveY(OsbEasing.InOutExpo, 91949, 92659, 305, 110);
+            title[0].MoveY(OsbEasing.InOutExpo, 101890, 102600, 110, 305);
             SimpleFadeOut(title, 126387, 128162);
 
             List<OsbSprite> artist = LyricLineSpriteFactoryHorizontal(layerG, smallFont, "THEMUSICALGHOST", new Vector2(320, 330));

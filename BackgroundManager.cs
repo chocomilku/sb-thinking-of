@@ -61,8 +61,18 @@ namespace StorybrewScripts
             GhostController ghost = new GhostController(this, ghostLayer, "sb/ghost.png", new Vector2(320, 200));
             ghost.InitSprite(1061);
             ghost.FadeIn(1417, 2038);
-            ghost.BopMovement(1417, 129227, (int)BeatDuration * 8, 15);
+            ghost.BopMovement(1417, 35499, (int)BeatDuration * 8, 15);
+            ghost.FadeOut(35144, 35499);
+
+            ghost.FadeIn(46683, 46860);
+            ghost.BopMovement(46683, 92304, (int)BeatDuration * 8, 15);
+            ghost.FadeOut(91949, 92304);
+
+            ghost.FadeIn(103310, 103665);
+            ghost.BopMovement(103488, 128162, (int)BeatDuration * 8, 15);
             ghost.FadeOut(126387, 128162);
+
+
 
             List<(int, int)> ghostBeams = [(24138, 25203), (25559, 25914), (26091, 26446), (26624, 27689), (28399, 28754), (28931, 29286), (29819, 30884), (31239, 31594), (31772, 32127), (32304, 33369), (34079, 34434), (34612, 34967), (35144, 35499), (46860, 47570), (47748, 47925), (48103, 48458), (48990, 49168), (49345, 49523), (49701, 50411), (50588, 50766), (50943, 51298), (51831, 52008), (52186, 52363), (52541, 53073), (53783, 54138), (54671, 54848), (55026, 55203), (55381, 55736), (55914, 56269), (56446, 56801), (56979, 57334), (57511, 57866), (57866, 58221), (59109, 59286), (59464, 59996), (60706, 60884), (61061, 61416), (62304, 62659), (63192, 63369), (63547, 63724), (63902, 64257), (64612, 64789), (64908, 65085), (65144, 65677), (66032, 66387), (66742, 67097), (67274, 67630), (67807, 68162), (68340, 68695), (68872, 69050), (69227, 69405)];
 
@@ -76,26 +86,66 @@ namespace StorybrewScripts
 
             // particles
             StoryboardLayer particleLayer = GetLayer("Particle Layer");
-            ParticleGoingUp(particleLayer, "sb/icons/star.png", 12777, 24138, 16, 60, 0, (int)BeatDuration * 2, new Color4(218, 46, 127, 255));
-            ParticleGoingUp(particleLayer, "sb/icons/circle.png", 12777, 24138, 16, 60, 0, (int)BeatDuration * 2, new Color4(218, 46, 127, 255));
-            ParticleGoingUp(particleLayer, "sb/icons/rectangle.png", 12777, 24138, 16, 60, 0, (int)BeatDuration * 2, new Color4(218, 46, 127, 255));
-            ParticleGoingUp(particleLayer, "sb/icons/triangle.png", 12777, 24138, 16, 60, 0, (int)BeatDuration * 2, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/star.png", 13132, 24138, 16, 60, 0, (int)BeatDuration * 2, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/circle.png", 13132, 24138, 16, 60, 0, (int)BeatDuration * 2, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/rectangle.png", 13132, 24138, 16, 60, 0, (int)BeatDuration * 2, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/triangle.png", 13132, 24138, 16, 60, 0, (int)BeatDuration * 2, new Color4(218, 46, 127, 255));
 
-            ParticleGoingUp(particleLayer, "sb/icons/clap.png", 69582, 80943, 64, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
-            ParticleGoingUp(particleLayer, "sb/icons/drum.png", 80943, 92304, 64, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/clap.png", 69582, 80943, 75, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/drum.png", 80943, 92304, 60, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
 
-            ParticleGoingUp(particleLayer, "sb/icons/triangle.png", 103665, 126387, 32, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
-            ParticleGoingUp(particleLayer, "sb/icons/circle.png", 103665, 126387, 32, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
-            ParticleGoingUp(particleLayer, "sb/icons/star.png", 103665, 126387, 32, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
-            ParticleGoingUp(particleLayer, "sb/icons/rectangle.png", 103665, 126387, 32, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
-            ParticleGoingUp(particleLayer, "sb/icons/drum.png", 103665, 126387, 32, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
-            ParticleGoingUp(particleLayer, "sb/icons/clap.png", 103665, 126387, 32, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/triangle.png", 103665, 126387, 50, 60, 5, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/circle.png", 103665, 126387, 50, 60, 5, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/star.png", 103665, 126387, 50, 60, 5, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/rectangle.png", 103665, 126387, 50, 60, 5, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/drum.png", 103665, 126387, 50, 60, 5, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/clap.png", 103665, 126387, 50, 60, 5, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+
+            // frames
+            StoryboardLayer frameLayer = GetLayer("Frame Layer");
+
+            FrameGenerator(frameLayer, "sb/frames/1/.jpg", 35499, 41180, (int)BeatDuration * 2, true, false);
+            FrameGenerator(frameLayer, "sb/frames/1/.jpg", 41180, 44020, (int)BeatDuration * 1, false, false);
+            FrameGenerator(frameLayer, "sb/frames/1/.jpg", 44020, 44553, (int)BeatDuration / 2, false, false);
+            FrameGenerator(frameLayer, "sb/frames/1/.jpg", 44553, 45440, (int)BeatDuration / 4, false, true);
+
+            FrameGenerator(frameLayer, "sb/frames/2/.jpg", 92304, 97985, (int)BeatDuration * 2, true, false);
+            FrameGenerator(frameLayer, "sb/frames/2/.jpg", 97985, 100825, (int)BeatDuration * 1, false, false);
+            FrameGenerator(frameLayer, "sb/frames/2/.jpg", 100825, 101357, (int)BeatDuration / 2, false, false);
+            FrameGenerator(frameLayer, "sb/frames/2/.jpg", 101357, 102245, (int)BeatDuration / 4, false, true);
+
+
         }
+
+        void FrameGenerator(StoryboardLayer layer, string path, int startTime, int endTime, int interval, bool startFade = true, bool endFade = true)
+        {
+            OsbAnimation frame = layer.CreateAnimation(path, 4, interval, OsbLoopType.LoopForever, OsbOrigin.Centre, new Vector2(320, 220));
+            if (startFade)
+            {
+                frame.Fade(startTime, startTime + BeatDuration, 0, 1);
+            }
+            else
+            {
+                frame.Fade(startTime, 1);
+            }
+            frame.Scale(startTime, 480.0 / 1080 * 0.33);
+
+            if (endFade)
+            {
+                frame.Fade(endTime - BeatDuration / 2, endTime, 1, 0);
+            }
+            else
+            {
+                frame.Fade(endTime, 0);
+            }
+        }
+
+
 
         void ParticleGoingUp(StoryboardLayer layer, string particlePath, int startTime, int endTime, int particleCount, int posYAmount, int posXRange, int delay, Color4 color)
         {
             OsbEasing Easing = OsbEasing.OutCubic;
-            float ColorVariance = 0.3f;
+            float ColorVariance = 0f;
 
             int randomFactor = endTime - startTime - delay;
             List<int> delayValues = [];
@@ -131,7 +181,7 @@ namespace StorybrewScripts
                 if (i % 10 == 0) Scale = Random(0.4, 0.55);
                 else Scale = Random(0.2, 0.35);
 
-                p.Fade(currentTime, currentTime + BeatDuration / 2, 0, 0.15);
+                p.Fade(currentTime, currentTime + BeatDuration / 2, 0, 0.25);
                 p.Scale(currentTime, Scale);
                 // p.Additive(currentTime);
 
@@ -207,9 +257,6 @@ namespace StorybrewScripts
                 sprite.Scale(time, 854.0f / ctx.GetMapsetBitmap(sprite.TexturePath).Width * 0.125f * scale);
             }
 
-
-
-
             public void FadeIn(int startTime, int endTime)
             {
                 sprite.Fade(startTime, endTime, 0, 1);
@@ -253,8 +300,8 @@ namespace StorybrewScripts
 
             public void GhostBeam(int startTime, int endTime, bool toLeft = true, bool additive = false)
             {
-                float beam1Opacity = 0.2f;
-                float beam2Opacity = 0.1f;
+                float beam1Opacity = 0.25f;
+                float beam2Opacity = 0.15f;
                 Vector2 beam1Pos = toLeft ? new Vector2(150, 220) : new Vector2(515, 220);
                 Vector2 beam2Pos = toLeft ? new Vector2(-75, 220) : new Vector2(745, 220);
 

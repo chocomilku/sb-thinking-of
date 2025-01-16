@@ -24,6 +24,11 @@ Layers:
     OsbLayer: Background
     DiffSpecific: No
     Visible: Yes
+  b6aa4a56a13b4d329d2e975792bb149a:
+    Name: "Frame Layer"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
   243bfc21445c49e194ccda711a1ed79b:
     Name: "Ghost Layer"
     OsbLayer: Background
