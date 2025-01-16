@@ -5,7 +5,7 @@ Multithreaded: No
 Config:
   RandomSeed:
     Type: "System.Int32"
-    Value: "0"
+    Value: "4"
     DisplayName: "Random Seed"
     BeginsGroup: "Common"
 Layers:
@@ -16,6 +16,16 @@ Layers:
     Visible: Yes
   b5f7b8e0b65c495fa1d2ee68e4b41c3c:
     Name: "BG Layer"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
+  b8dba9ebdde44eb1b957fdecc2b20731:
+    Name: "Particle Layer"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
+  243bfc21445c49e194ccda711a1ed79b:
+    Name: "Ghost Layer"
     OsbLayer: Background
     DiffSpecific: No
     Visible: Yes

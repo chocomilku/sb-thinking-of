@@ -14,6 +14,21 @@ namespace StorybrewScripts
 {
     public class BackgroundManager : StoryboardObjectGenerator
     {
+        static float ScreenWidth = OsuHitObject.WidescreenStoryboardSize.X;
+        static float ScreenHeight = OsuHitObject.WidescreenStoryboardSize.Y;
+
+        static float PlayfieldHeight = OsuHitObject.PlayfieldSize.Y;
+        static float PlayfieldWidth = OsuHitObject.PlayfieldSize.X;
+
+        static float ScreenBoundsLeft = OsuHitObject.WidescreenStoryboardBounds.Left;
+        static float ScreenBoundsRight = OsuHitObject.WidescreenStoryboardBounds.Right;
+        static float ScreenBoundsBottom = OsuHitObject.WidescreenStoryboardBounds.Bottom;
+        static float ScreenBoundsTop = OsuHitObject.WidescreenStoryboardBounds.Top;
+
+        static float PlayfieldBoundsTop = OsuHitObject.PlayfieldToStoryboardOffset.Y;
+        static float PlayfieldBoundsBottom = PlayfieldHeight + OsuHitObject.PlayfieldToStoryboardOffset.Y;
+        static float PlayfieldBoundsLeft = OsuHitObject.PlayfieldToStoryboardOffset.X;
+        static float PlayfieldBoundsRight = PlayfieldWidth + OsuHitObject.PlayfieldToStoryboardOffset.X;
         public static double BeatDuration;
         public override void Generate()
         {
@@ -39,13 +54,119 @@ namespace StorybrewScripts
             OsbSprite outline = layer.CreateSprite("sb/outline.png", OsbOrigin.Centre, new Vector2(320, 240));
             outline.Fade(12422, 0);
             OutlineJumpscare(outline, 12422);
+            OutlineJumpscare(outline, 114848);
 
             // GhostController
-            GhostController ghost = new GhostController(this, layer, "sb/ghost.png", new Vector2(320, 200));
+            StoryboardLayer ghostLayer = GetLayer("Ghost Layer");
+            GhostController ghost = new GhostController(this, ghostLayer, "sb/ghost.png", new Vector2(320, 200));
             ghost.InitSprite(1061);
             ghost.FadeIn(1417, 2038);
             ghost.BopMovement(1417, 126387, (int)BeatDuration * 8, 15);
             ghost.FadeOut(126387);
+
+            // particles
+            StoryboardLayer particleLayer = GetLayer("Particle Layer");
+            ParticleGoingUp(particleLayer, "sb/icons/star.png", 12777, 24138, 16, 60, 0, (int)BeatDuration * 2, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/circle.png", 12777, 24138, 16, 60, 0, (int)BeatDuration * 2, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/rectangle.png", 12777, 24138, 16, 60, 0, (int)BeatDuration * 2, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/triangle.png", 12777, 24138, 16, 60, 0, (int)BeatDuration * 2, new Color4(218, 46, 127, 255));
+
+            ParticleGoingUp(particleLayer, "sb/icons/clap.png", 69582, 80943, 64, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/drum.png", 80943, 92304, 64, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+
+            ParticleGoingUp(particleLayer, "sb/icons/triangle.png", 103665, 126387, 32, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/circle.png", 103665, 126387, 32, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/star.png", 103665, 126387, 32, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/rectangle.png", 103665, 126387, 32, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/drum.png", 103665, 126387, 32, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+            ParticleGoingUp(particleLayer, "sb/icons/clap.png", 103665, 126387, 32, 40, 0, (int)BeatDuration * 1, new Color4(218, 46, 127, 255));
+        }
+
+        void ParticleGoingUp(StoryboardLayer layer, string particlePath, int startTime, int endTime, int particleCount, int posYAmount, int posXRange, int delay, Color4 color)
+        {
+            OsbEasing Easing = OsbEasing.OutCubic;
+            float ColorVariance = 0.3f;
+
+            int randomFactor = endTime - startTime - delay;
+            List<int> delayValues = [];
+
+            for (int j = 0; j <= randomFactor; j += delay)
+            {
+                delayValues.Add(j);
+            }
+
+            for (int i = 0; i < particleCount; i++)
+            {
+                int selectedDelayValue = delayValues[Random(-10, delayValues.Count) < 0 ? 0 : Random(0, delayValues.Count)];
+                int currentTime = selectedDelayValue + startTime;
+
+                float startX = Random(ScreenBoundsLeft, ScreenBoundsRight);
+                float startY;
+
+                if (selectedDelayValue <= 0)
+                {
+
+                    startY = Random(ScreenBoundsBottom, ScreenBoundsTop);
+                }
+                else
+                {
+                    startY = ScreenBoundsBottom;
+                }
+
+                Log($"CurrentTime: {currentTime}, d: {selectedDelayValue}, StartX: {startX}, StartY: {startY}");
+
+                OsbSprite p = layer.CreateSprite(particlePath, OsbOrigin.Centre, new Vector2(startX, startY));
+
+                double Scale;
+                if (i % 10 == 0) Scale = Random(0.4, 0.55);
+                else Scale = Random(0.2, 0.35);
+
+                p.Fade(currentTime, currentTime + BeatDuration / 2, 0, 0.15);
+                p.Scale(currentTime, Scale);
+                // p.Additive(currentTime);
+
+                Color4 newColor = color;
+                if (ColorVariance > 0)
+                {
+                    ColorVariance = MathHelper.Clamp(ColorVariance, 0, 1);
+
+                    var hsba = Color4.ToHsl(color);
+                    var sMin = Math.Max(0, hsba.Y - ColorVariance * 0.5f);
+                    var sMax = Math.Min(sMin + ColorVariance, 1);
+                    var vMin = Math.Max(0, hsba.Z - ColorVariance * 0.5f);
+                    var vMax = Math.Min(vMin + ColorVariance, 1);
+
+                    newColor = Color4.FromHsl(new Vector4(
+                         hsba.X,
+                         (float)Random(sMin, sMax),
+                         (float)Random(vMin, vMax),
+                         hsba.W));
+                }
+
+                p.Color(currentTime, newColor);
+
+                while (!(currentTime >= endTime))
+                {
+                    // Log($"CurrentTime: {currentTime}, NextTime: {currentTime + delay}");
+                    if (p.PositionAt(currentTime).Y - posYAmount < ScreenBoundsTop - PlayfieldBoundsTop)
+                    {
+                        p.Fade(currentTime, 0);
+                        break;
+                    }
+
+                    if (currentTime + delay >= endTime)
+                    {
+                        p.Fade(endTime - BeatDuration / 2, endTime, p.OpacityAt(endTime - BeatDuration / 2), 0);
+                    }
+
+                    p.MoveX(OsbEasing.None, currentTime, currentTime + delay, p.PositionAt(currentTime).X, p.PositionAt(currentTime).X + Random(-posXRange, +posXRange));
+                    p.MoveY(Easing, currentTime, currentTime + delay, p.PositionAt(currentTime).Y, p.PositionAt(currentTime).Y - posYAmount);
+
+                    currentTime += delay;
+
+                }
+
+            }
         }
 
         public void OutlineJumpscare(OsbSprite sprite, int time)
