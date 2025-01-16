@@ -14,6 +14,11 @@ Layers:
     OsbLayer: Background
     DiffSpecific: No
     Visible: Yes
+  bae61d1ae4104f1991f87807d0eba759:
+    Name: "Ghost Layer"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
   0d95eeb653be41ec9c77d7361c1c3340:
     Name: "Text Layer -- Diff Specific"
     OsbLayer: Foreground

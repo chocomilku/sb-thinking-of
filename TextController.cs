@@ -58,6 +58,7 @@ namespace StorybrewScripts
 
             // layers
             StoryboardLayer layer = GetLayer("Text Layer");
+            StoryboardLayer layerG = GetLayer("Ghost Layer");
             StoryboardLayer layerD = GetLayer("Text Layer -- Diff Specific");
 
             //
@@ -68,50 +69,52 @@ namespace StorybrewScripts
             SimpleFadeIn(introArtist, 706, 884);
             SimpleFadeOut(introArtist, 1061, 1328);
 
-            List<OsbSprite> title = LyricLineSpriteFactoryHorizontal(layer, mediumFont, "THINKING OF", new Vector2(320, 305));
+            List<OsbSprite> title = LyricLineSpriteFactoryHorizontal(layerG, mediumFont, "THINKING OF", new Vector2(320, 305));
             LyricInitializer(title, 1772, new Color4(218, 46, 127, 255));
             SimpleFadeIn(title, 1772, 2127);
             SimpleFadeOut(title, 126387, 128162);
 
-            List<OsbSprite> artist = LyricLineSpriteFactoryHorizontal(layer, smallFont, "THEMUSICALGHOST", new Vector2(320, 330));
+            List<OsbSprite> artist = LyricLineSpriteFactoryHorizontal(layerG, smallFont, "THEMUSICALGHOST", new Vector2(320, 330));
             LyricInitializer(artist, 1772, new Color4(50, 43, 59, 255));
             SimpleFadeIn(artist, 1772, 2127);
             SimpleFadeOut(artist, 126387, 128162);
 
             List<OsbSprite> three = LyricSpritesFactoryHorizontal(layer, extraBigFont, "3", new Vector2(0, 240));
             LyricInitializer(three, 45263, new Color4(218, 46, 127, 255));
-            SimpleFadeIn(three, 45263, 45440, 0.5);
+            SimpleFadeIn(three, 45263, 45440, 1);
             three[0].MoveX(OsbEasing.OutBack, 45263, 45440, -25, 0);
             SimpleFadeOut(three, 45618, 45795);
 
             List<OsbSprite> two = LyricSpritesFactoryHorizontal(layer, extraBigFont, "2", new Vector2(640, 240));
             LyricInitializer(two, 45618, new Color4(218, 46, 127, 255));
-            SimpleFadeIn(two, 45618, 45795, 0.5);
+            SimpleFadeIn(two, 45618, 45795, 1);
             two[0].MoveX(OsbEasing.OutBack, 45618, 45795, 665, 640);
             SimpleFadeOut(two, 45973, 46150);
 
             List<OsbSprite> one = LyricSpritesFactoryHorizontal(layer, extraBigFont, "1", new Vector2(0, 240));
             LyricInitializer(one, 45973, new Color4(218, 46, 127, 255));
-            SimpleFadeIn(one, 45973, 46150, 0.5);
+            SimpleFadeIn(one, 45973, 46150, 1);
             one[0].MoveX(OsbEasing.OutBack, 45973, 46150, -25, 0);
             SimpleFadeOut(one, 46328, 46505);
 
             List<OsbSprite> yeah = LyricLineSpriteFactoryHorizontal(layer, extraBigFont, "YEAH!", new Vector2(640, 240));
             LyricInitializer(yeah, 46328, new Color4(218, 46, 127, 255));
-            SimpleFadeIn(yeah, 46328, 46505, 0.25);
+            SimpleFadeIn(yeah, 46328, 46505, 0.5);
             yeah[0].MoveX(OsbEasing.OutBack, 46328, 46505, 665, 320);
             SimpleFadeOut(yeah, 46683, 46860);
 
-            List<OsbSprite> get = LyricLineSpriteFactoryHorizontal(layer, extraBigFont, "GET", new Vector2(0, 165));
+            List<OsbSprite> get = LyricLineSpriteFactoryHorizontal(layerG, extraBigFont, "GET", new Vector2(0, 165));
             LyricInitializer(get, 102245, new Color4(218, 46, 127, 255));
             SimpleFadeIn(get, 102245, 102600, 0.25);
             get[0].MoveX(OsbEasing.OutExpo, 102245, 102600, -25, 320);
+            get[0].Scale(OsbEasing.InExpo, 103310, 103488, 0.5, 1);
             SimpleFadeOut(get, 103310, 103488);
 
-            List<OsbSprite> ready = LyricLineSpriteFactoryHorizontal(layer, extraBigFont, "READY", new Vector2(640, 395));
+            List<OsbSprite> ready = LyricLineSpriteFactoryHorizontal(layerG, extraBigFont, "READY", new Vector2(640, 395));
             LyricInitializer(ready, 102245, new Color4(218, 46, 127, 255));
             SimpleFadeIn(ready, 102422, 102777, 0.25);
             ready[0].MoveX(OsbEasing.OutExpo, 102422, 102777, 665, 320);
+            ready[0].Scale(OsbEasing.InExpo, 103310, 103488, 0.5, 1);
             SimpleFadeOut(ready, 103310, 103488);
 
 
