@@ -51,8 +51,9 @@ namespace StorybrewScripts
             circle.Scale(OsbEasing.InExpo, 1061, 1417, 0, 854.0f / GetMapsetBitmap(circle.TexturePath).Width * 2);
 
             // outline
-            OsbSprite outline = layer.CreateSprite("sb/outline.png", OsbOrigin.Centre, new Vector2(320, 240));
+            OsbSprite outline = layer.CreateSprite("sb/icons/circle.png", OsbOrigin.Centre, new Vector2(320, 240));
             outline.Fade(12422, 0);
+            outline.Color(12422, new Color4(218, 46, 127, 255));
             OutlineJumpscare(outline, 12422);
             OutlineJumpscare(outline, 114848);
 

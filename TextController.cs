@@ -78,7 +78,7 @@ namespace StorybrewScripts
             title[0].MoveY(OsbEasing.InOutExpo, 101890, 102600, 110, 305);
             SimpleFadeOut(title, 126387, 128162);
 
-            List<OsbSprite> artist = LyricLineSpriteFactoryHorizontal(layerG, smallFont, "THEMUSICALGHOST", new Vector2(320, 330));
+            List<OsbSprite> artist = LyricLineSpriteFactoryHorizontal(layerG, smallFont, "THE MUSICAL GHOST", new Vector2(320, 330));
             LyricInitializer(artist, 1772, new Color4(50, 43, 59, 255));
             SimpleFadeIn(artist, 1772, 2127);
             SimpleFadeOut(artist, 126387, 128162);
