@@ -103,20 +103,20 @@ namespace StorybrewScripts
 
             List<OsbSprite> yeah = LyricLineSpriteFactoryHorizontal(layer, extraBigFont, "YEAH!", new Vector2(640, 240));
             LyricInitializer(yeah, 46328, new Color4(218, 46, 127, 255));
-            SimpleFadeIn(yeah, 46328, 46505, 0.5);
+            SimpleFadeIn(yeah, 46328, 46505, 0.4);
             yeah[0].MoveX(OsbEasing.OutBack, 46328, 46505, 665, 320);
             SimpleFadeOut(yeah, 46683, 46860);
 
             List<OsbSprite> get = LyricLineSpriteFactoryHorizontal(layerG, extraBigFont, "GET", new Vector2(0, 165));
             LyricInitializer(get, 102245, new Color4(218, 46, 127, 255));
-            SimpleFadeIn(get, 102245, 102600, 0.25);
+            SimpleFadeIn(get, 102245, 102600, 0.4);
             get[0].MoveX(OsbEasing.OutExpo, 102245, 102600, -25, 320);
             get[0].Scale(OsbEasing.InExpo, 103310, 103488, 0.5, 1);
             SimpleFadeOut(get, 103310, 103488);
 
             List<OsbSprite> ready = LyricLineSpriteFactoryHorizontal(layerG, extraBigFont, "READY", new Vector2(640, 395));
             LyricInitializer(ready, 102245, new Color4(218, 46, 127, 255));
-            SimpleFadeIn(ready, 102422, 102777, 0.25);
+            SimpleFadeIn(ready, 102422, 102777, 0.4);
             ready[0].MoveX(OsbEasing.OutExpo, 102422, 102777, 665, 320);
             ready[0].Scale(OsbEasing.InExpo, 103310, 103488, 0.5, 1);
             SimpleFadeOut(ready, 103310, 103488);

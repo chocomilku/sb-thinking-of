@@ -163,6 +163,7 @@ namespace StorybrewScripts
         {
             OsbEasing Easing = OsbEasing.OutCubic;
             float ColorVariance = 0f;
+            float opacity = 0.5f;
 
             int randomFactor = endTime - startTime - delay;
             List<int> delayValues = [];
@@ -196,7 +197,7 @@ namespace StorybrewScripts
                 if (i % 10 == 0) Scale = Random(0.4, 0.55);
                 else Scale = Random(0.2, 0.35);
 
-                p.Fade(currentTime, currentTime + BeatDuration / 2, 0, 0.25);
+                p.Fade(currentTime, currentTime + BeatDuration / 2, 0, opacity);
                 p.Scale(currentTime, Scale);
                 // p.Additive(currentTime);
 
@@ -279,7 +280,7 @@ namespace StorybrewScripts
             }
             public void FadeOut(int startTime, int endTime)
             {
-                sprite.Fade(startTime, endTime, 1, 0);
+                sprite.Fade(startTime, endTime, sprite.OpacityAt(startTime), 0);
             }
 
             public void BopMovement(int startTime, int endTime, int interval, int amount)
@@ -318,8 +319,8 @@ namespace StorybrewScripts
 
             public void GhostBeam(int startTime, int endTime, bool toLeft = true, bool additive = false)
             {
-                float beam1Opacity = 0.25f;
-                float beam2Opacity = 0.15f;
+                float beam1Opacity = 0.45f;
+                float beam2Opacity = 0.25f;
                 Vector2 beam1Pos = toLeft ? new Vector2(150, 220) : new Vector2(515, 220);
                 Vector2 beam2Pos = toLeft ? new Vector2(-75, 220) : new Vector2(745, 220);
 
