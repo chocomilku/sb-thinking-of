@@ -32,6 +32,9 @@ namespace StorybrewScripts
         public static double BeatDuration;
         public override void Generate()
         {
+            Log(ScreenBoundsTop - PlayfieldBoundsTop);
+            Log(ScreenBoundsTop);
+            Log(PlayfieldBoundsTop);
             BeatDuration = Beatmap.TimingPoints.First().BeatDuration;
             GetLayer("Remove BG").CreateSprite(Beatmap.BackgroundPath).Fade(0, 0);
 
@@ -223,9 +226,10 @@ namespace StorybrewScripts
 
                 while (!(currentTime >= endTime))
                 {
-                    if (p.PositionAt(currentTime).Y - posYAmount < ScreenBoundsTop - PlayfieldBoundsTop)
+                    if (p.PositionAt(currentTime).Y - posYAmount < (ScreenBoundsTop - PlayfieldBoundsTop) * 1.5)
                     {
                         p.Fade(currentTime, 0);
+                        Log($"time: {currentTime}, pos: {p.PositionAt(currentTime).Y - posYAmount}");
                         break;
                     }
 
